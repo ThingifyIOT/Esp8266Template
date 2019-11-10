@@ -27,9 +27,9 @@ bool OnNodeValueChanged(void*_, Node *node)
 	return true;
 }
 
-NodeValue RapidIgnitionFired(void* context, FunctionArguments &args)
+NodeValue FunctionExecuted(void* context, FunctionArguments &args)
 {
-	return NodeValue::String("Ignited");
+	return NodeValue::String("Hello from function!");
 }
 
 
@@ -43,7 +43,7 @@ void setup()
 	thing.WatchdogEnabled = true;
 
   thing.AddBoolean("bool")->OnChanged(OnNodeValueChanged);
-  thing.AddFunction("Function", RapidIgnitionFired);
+  thing.AddFunction("Function", FunctionExecuted);
   thing.AddInt("integer", ThingifyUnit::Volt)->SetValue(NodeValue::Int(220));
   thing.AddRange("range", 10, 30, 2, ThingifyUnit::Percent)->OnChanged(OnNodeValueChanged);
   thing.AddColor("Color")->OnChanged(OnNodeValueChanged);
