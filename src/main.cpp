@@ -1,8 +1,8 @@
 #include <Arduino.h>
-#include <ContiEsp.h>
+#include <ThingifyEsp.h>
 #include <DebugNodesModule.h>
 
-ContiEsp thing("<token>", "Sample Thing");
+ThingifyEsp thing("<token>", "Sample Thing");
 
 
 bool OnBoolChanged(void*_, Node *node)
@@ -44,8 +44,8 @@ void setup()
 
   thing.AddBoolean("bool")->OnChanged(OnNodeValueChanged);
   thing.AddFunction("Function", RapidIgnitionFired);
-  thing.AddInt("integer", ContiUnit::Volt)->SetValue(NodeValue::Int(220));
-  thing.AddRange("range", 10, 30, 2, ContiUnit::Percent)->OnChanged(OnNodeValueChanged);
+  thing.AddInt("integer", ThingifyUnit::Volt)->SetValue(NodeValue::Int(220));
+  thing.AddRange("range", 10, 30, 2, ThingifyUnit::Percent)->OnChanged(OnNodeValueChanged);
   thing.AddColor("Color")->OnChanged(OnNodeValueChanged);
 	thing.Start();
 }
