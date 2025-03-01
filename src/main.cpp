@@ -28,23 +28,23 @@ NodeValue FunctionExecuted(void* context, FunctionArguments &args)
     return NodeValue::String("Hello from function!");
 }
 
-
 void setup()
 {
-    Serial.begin(500000);
+   Serial.begin(500000);
+
+   pinMode(D1, OUTPUT);
 
     thing.AddDiagnostics();
+    thing.AddStatusLed(D1);
 
-    thing.AddBoolean("bool")->OnChanged(OnNodeValueChanged);
+    thing.AddBoolean("Bool")->OnChanged(OnNodeValueChanged);
     thing.AddFunction("Function", FunctionExecuted, nullptr);
-    thing.AddInt("integer", ThingifyUnit::Volt)->SetValue(NodeValue::Int(220));
-    thing.AddRange("range", 10, 30, 2, ThingifyUnit::Percent)->OnChanged(OnNodeValueChanged);
+    thing.AddInt("Integer", ThingifyUnit::Volt)->SetValue(NodeValue::Int(220));
+    thing.AddRange("Range", 10, 30, 2, ThingifyUnit::Percent)->OnChanged(OnNodeValueChanged);
     thing.AddColor("Color")->OnChanged(OnNodeValueChanged);
-    
+    Serial.println("Executing thing start");
     thing.Start();
 }
-
-
 
 void loop()
 {
